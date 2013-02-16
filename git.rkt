@@ -2,7 +2,7 @@
 (require "rsh.rkt")
 (require "racket-ext.rkt")
 
-(provide master clone fetch merge push remote remote-add branch checkout init add commit)
+(provide master clone fetch merge push remote remote-add branch checkout init add commit pull)
 
 (define master "master")
 
@@ -24,11 +24,15 @@
 (define (push destination)
   (system (str "git push " destination)))
 
-(define (branch branch-name)
-  (system (str "git branch " branch-name)))
+(define branch
+  (case-lambda
+    [() (system "git branch")]
+    [(name) (system (str "git branch name"))]))
 
-(define (checkout branch-name)
-  (system (str "git checkout " branch-name)))
+(define checkout
+  (case-lambda 
+    [() (system "git checkout")]
+    [(branch-name) (system (str "git checkout " branch-name))]))
 
 (define (add)
   (system (str "git add .")))
@@ -39,6 +43,9 @@
 (define (commit message)
   (system (str "git commit --all -m " message)))
          
+(define (pull repository)
+  (system (str "git pull " repository)))
+
 
 
 
