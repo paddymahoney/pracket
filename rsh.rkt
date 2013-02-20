@@ -1,7 +1,13 @@
 #lang racket
+(require racket/file
+         "user.rkt")
+
 (require (for-syntax syntax/parse))
 
-(provide home-dir cd cwd pwd chdir mkdir make-dir with-cwd with-cwd*)
+(provide home-dir cd cwd pwd chdir mkdir make-dir with-cwd with-cwd* create-temp-file 
+         (all-from-out "user.rkt"))
+
+(define create-temp-file make-temporary-file)
 
 (define (home-dir)
   (find-system-path 'home-dir))
@@ -26,3 +32,4 @@
     [(with-cwd path body ...)
      #'(with-cwd* path 
                   (lambda () body ...))]))
+

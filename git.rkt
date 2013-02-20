@@ -41,7 +41,7 @@
   (system (str "git init")))
 
 (define (commit message)
-  (system (str "git commit --all -m " message)))
+  (system (str "git commit -m \"" message "\"")))
          
 (define (pull repository)
   (system (str "git pull " repository)))
